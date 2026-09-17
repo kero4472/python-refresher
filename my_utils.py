@@ -15,7 +15,7 @@ def get_column(file_name, query_column, query_value, result_column=1):
                 if columns[query_column] == query_value:
 
                     try:
-                        value = int(columns[result_column])
+                        value = int(float(columns[result_column]))
                         results.append(value)
 
                     except ValueError:
