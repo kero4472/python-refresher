@@ -1,5 +1,3 @@
-# #!/bin/bash
-
 # Example 1: valid run
 python print_fires.py \
     --country Afghanistan \
