@@ -1,4 +1,15 @@
 def get_column(file_name, query_column, query_value, result_column=1):
+    """
+    Return integer values from a selected column of a CSV file.
+
+    The function reads the CSV file one line at a time and checks whether
+    the value in query_column matches query_value. If a match is found,
+    the value from result_column is converted to an integer and added to
+    the results list.
+
+    Returns:
+        A list of integers from rows that match the query value.
+    """
 
     # Create an empty list to store matching values
     results = []
