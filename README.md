@@ -11,7 +11,7 @@ The program allows the user to specify the country, the column containing countr
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kero4472/python-refresher
 ```
 
 ### 2. Create and activate the Mamba environment
