@@ -1,3 +1,4 @@
+import os
 import random
 import unittest
 
@@ -5,11 +6,23 @@ import my_utils
 
 
 class TestMyUtils(unittest.TestCase):
+    def setUp(self):
+        self.test_file = 'test_data.csv'
+
+        with open(self.test_file, 'w') as file:
+            file.write('Country,Fires\n')
+            file.write('USA,100\n')
+            file.write('USA,200\n')
+            file.write('USA,300\n')
+
+    def tearDown(self):
+        os.remove(self.test_file)
+
     def test_get_column(self):
-        # Test case for get_column function
+        # Test normal case for get_column
         self.assertEqual(
             my_utils.get_column(
-                'test_data.csv',
+                self.test_file,
                 0,
                 'USA',
                 1
@@ -18,10 +31,10 @@ class TestMyUtils(unittest.TestCase):
         )
 
     def test_get_column_empty(self):
-        # Test case for get_column function with no matching country
+        # Test case with no matching country
         self.assertEqual(
             my_utils.get_column(
-                'test_data.csv',
+                self.test_file,
                 0,
                 'Canada',
                 1
@@ -30,17 +43,14 @@ class TestMyUtils(unittest.TestCase):
         )
 
     def test_get_column_random(self):
-        # Test case for get_column function with random values
+        # Test get_column with random values
         country = 'USA'
-        country_column = 0
-        result_column = 1
         expected_results = [
             random.randint(1, 100)
             for _ in range(5)
         ]
 
-        # Create a temporary CSV file with random data
-        with open('temp_test_data.csv', 'w') as file:
+        with open(self.test_file, 'w') as file:
             file.write('Country,Fires\n')
 
             for value in expected_results:
@@ -48,10 +58,10 @@ class TestMyUtils(unittest.TestCase):
 
         self.assertEqual(
             my_utils.get_column(
-                'temp_test_data.csv',
-                country_column,
+                self.test_file,
+                0,
                 country,
-                result_column
+                1
             ),
             expected_results
         )
