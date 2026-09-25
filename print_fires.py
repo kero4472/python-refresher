@@ -50,6 +50,14 @@ parser.add_argument(
     required=True
 )
 
+# Add optional operation to perform on the returned fire values.
+parser.add_argument(
+    '--operation',
+    type=str,
+    choices=['mean', 'median', 'std'],
+    help='Operation to perform on the returned fire values.'
+)
+
 # Read the command-line arguments provided by the user.
 args = parser.parse_args()
 
@@ -58,6 +66,7 @@ country = args.country
 country_column = args.country_column
 fires_column = args.fires_column
 file_name = args.file_name
+operation = args.operation
 
 # Get the fire values for the selected country.
 fires = my_utils.get_column(
@@ -71,5 +80,15 @@ fires = my_utils.get_column(
 if len(fires) == 0:
     sys.exit(1)
 
-# Print the resulting list of fire values.
-print(fires)
+# Print the operation result, or fire values if no operation is given.
+if operation == 'mean':
+    print(my_utils.find_mean(fires))
+
+elif operation == 'median':
+    print(my_utils.find_median(fires))
+
+elif operation == 'std':
+    print(my_utils.find_standard_deviation(fires))
+
+else:
+    print(fires)
