@@ -119,7 +119,7 @@ def find_standard_deviation(values):
     If the list is empty, it returns None.
 
     Returns:
-        The standard deviation of the list as a float, 
+        The standard deviation of the list as a float,
         or None if the list is empty.
     """
 
