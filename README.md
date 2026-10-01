@@ -86,3 +86,11 @@ The functional tests check command-line output, operations, and exit codes.
 - Added the optional `--operation` argument to `print_fires.py`.
 - Added functional tests using the Stupid Simple Bash Testing framework.
 - Added test data and exit-code testing.
+
+## Version 4.0 Updates
+
+- Added a GitHub Actions continuous integration workflow.
+- Added automated unit testing on pushes and pull requests.
+- Added automated functional testing.
+- Added automated pycodestyle checks.
+- Configured the workflow to run on pushes to any branch and pull requests to main.
