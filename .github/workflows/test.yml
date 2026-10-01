@@ -1,0 +1,53 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run_unit_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-file: environment.yml
+          init-shell: bash
+
+      - run: |
+          cd unit_testing
+          python -m unittest test_my_utils
+        shell: bash -l {0}
+
+  run_functional_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-file: environment.yml
+          init-shell: bash
+
+      - run: |
+          cd functional_testing
+          bash test_print_fires.sh
+        shell: bash -l {0}
+
+  run_style_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-file: environment.yml
+          init-shell: bash
+
+      - run: pycodestyle $(git ls-files "*.py")
+        shell: bash -l {0}
